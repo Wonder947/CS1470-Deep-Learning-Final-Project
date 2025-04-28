@@ -9,6 +9,8 @@ class Hopfield_tf(tf.keras.layers.Layer):
       - iterative updates on the associative state ξ
       - optional final output projection
     
+    Future TODOs: support batch input
+    
     ξ₀ = softmax(β · QKᵀ)
     ξₜ₊₁ = softmax(β · (ξₜ K) Kᵀ)
     output = ξ_final · V
@@ -37,6 +39,9 @@ class Hopfield_tf(tf.keras.layers.Layer):
         self.pattern_dim_k = ks_shape[-1]
         self.pattern_dim_q = qs_shape[-1]
         assert vs_shape[-1] == self.pattern_dim_k, "V must match K in last dim"
+
+        if self.static:
+            assert self.pattern_dim_k==self.pattern_dim_q
 
         if not self.static:
             # only project once, in build:
