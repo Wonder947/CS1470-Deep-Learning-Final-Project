@@ -1,4 +1,4 @@
-# here we are going to implement the modern hopfield network in tensorflow
+# Implementation of the modern hopfield network in tensorflow
 
 import tensorflow as tf
 
